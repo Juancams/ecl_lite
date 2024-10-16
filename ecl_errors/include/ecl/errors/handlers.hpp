@@ -62,8 +62,16 @@ public:
 	 *
 	 * @param flag : the type of error that is to be returned.
 	 */
+	Error(const Error& other) : error_flag(other.error_flag) {}
 	explicit Error(const ErrorFlag& flag = UnknownError) : error_flag(flag) {}
 	virtual ~Error() {}
+
+	virtual Error& operator=(const Error& other) {
+        if (this != &other) {
+            error_flag = other.error_flag;
+        }
+        return *this;
+    }
 
 	/**
 	 * @brief The flag identifying the error identified with this error handler.
